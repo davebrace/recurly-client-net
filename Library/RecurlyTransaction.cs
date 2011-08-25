@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Xml;
-using System.Text;
 
 namespace Recurly
 {
@@ -10,13 +8,17 @@ namespace Recurly
     {
         public string Id { get; private set; }
         public int AmountInCents { get; private set; }
+        public string Description { get; private set; }
         public DateTime Date { get; private set; }
         public string Message { get; private set; }
         public string Status { get; private set; }
         public bool Success { get; private set; }
         public bool Voidable { get; private set; }
         public bool Refundable { get; private set; }
+
         public TransactionType Type { get; private set; }
+
+        public string AccountCode { get; private set; }
 
         public enum TransactionType : short
         {
@@ -38,7 +40,7 @@ namespace Recurly
 
         public static RecurlyTransaction Get(string transactionId)
         {
-            RecurlyTransaction transaction = new RecurlyTransaction();
+            var transaction = new RecurlyTransaction();
 
             HttpStatusCode statusCode = RecurlyClient.PerformRequest(RecurlyClient.HttpRequestMethod.Get,
                 UrlPrefix + System.Web.HttpUtility.UrlEncode(transactionId),
@@ -50,14 +52,40 @@ namespace Recurly
             return transaction;
         }
 
+        public static RecurlyTransaction CreateAccountTransaction(string accountCode, int amountInCents, string description)
+        {
+            var transaction = new RecurlyTransaction { AccountCode = accountCode, AmountInCents = amountInCents, Description = description };
+
+            var resultCode = RecurlyClient.PerformRequest(RecurlyClient.HttpRequestMethod.Post,
+                                               UrlPrefix,
+                                               new RecurlyClient.WriteXmlDelegate(transaction.WriteXml),
+                                               new RecurlyClient.ReadXmlDelegate(transaction.ReadXml));
+
+            return transaction;
+        }
+
         #region Read and Write XML documents
+
+        internal void WriteXml(XmlTextWriter xmlWriter)
+        {
+            xmlWriter.WriteStartElement("transaction");
+
+            xmlWriter.WriteElementString("amount_in_cents", AmountInCents.ToString());
+            xmlWriter.WriteElementString("description", Description);
+
+            xmlWriter.WriteStartElement("account");
+            xmlWriter.WriteElementString("account_code", this.AccountCode);
+            xmlWriter.WriteEndElement();
+
+            xmlWriter.WriteEndElement();
+        }
 
         internal void ReadXml(XmlTextReader reader)
         {
             while (reader.Read())
             {
                 // End of account element, get out of here
-                if ((reader.Name == "transaction" || reader.Name == "payment" || reader.Name == "refund") && 
+                if ((reader.Name == "transaction" || reader.Name == "payment" || reader.Name == "refund") &&
                     reader.NodeType == XmlNodeType.EndElement)
                     break;
 
