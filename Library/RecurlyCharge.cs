@@ -34,7 +34,7 @@ namespace Recurly
             RecurlyClient.PerformRequest(RecurlyClient.HttpRequestMethod.Post,
                 ChargesUrl(accountCode),
                 new RecurlyClient.WriteXmlDelegate(charge.WriteXml),
-                null);
+                new RecurlyClient.ReadXmlDelegate(charge.ReadXml));
 
             return charge;
         }
