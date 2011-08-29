@@ -40,7 +40,7 @@ namespace Recurly
             RecurlyClient.PerformRequest(RecurlyClient.HttpRequestMethod.Post,
                 CreditsUrl(accountCode),
                 new RecurlyClient.WriteXmlDelegate(credit.WriteXml),
-                null);
+                new RecurlyClient.ReadXmlDelegate(credit.ReadXml));
 
             return credit;
         }
