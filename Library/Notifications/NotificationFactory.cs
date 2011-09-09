@@ -6,39 +6,53 @@ namespace Recurly.Notifications
 {
     public class NotificationFactory
     {
+        internal const string FailedPaymentNotification = "failed_payment_notification";
+        internal const string SuccessfulPaymentNotification = "successful_payment_notification";
+        internal const string SuccessfulRefundNotification = "successful_refund_notification";
+        internal const string VoidPaymentNotification = "void_payment_notification";
+        internal const string NewAccountNotification = "new_account_notification";
+        internal const string CanceledAccountNotification = "canceled_account_notification";
+        internal const string BillingInfoUpdatedNotification = "billing_info_updated_notification";
+        internal const string NewSubscriptionNotification = "new_subscription_notification";
+        internal const string UpdatedSubscriptionNotification = "updated_subscription_notification";
+        internal const string ExpiredSubscriptionNotification = "expired_subscription_notification";
+        internal const string CanceledSubscriptionNotification = "canceled_subscription_notification";
+        internal const string RenewedSubscriptionNotification = "renewed_subscription_notification";
+        internal const string ReactivatedSubscriptionNotification = "reactivated_subscription_notification";
+
         public NotificationBase GetTypedNotification(XDocument document)
         {
             XElement firstElement = document.Elements().First();
 
             switch (firstElement.Name.LocalName)
             {
-                case "failed_payment_notification":
+                case FailedPaymentNotification:
                     return new PaymentNotification(document, PaymentNotificationType.Failed);
-                case "successful_payment_notification":
+                case SuccessfulPaymentNotification:
                     return new PaymentNotification(document, PaymentNotificationType.Success);
-                case "successful_refund_notification":
+                case SuccessfulRefundNotification:
                     return new PaymentNotification(document, PaymentNotificationType.Refund);
-                case "void_payment_notification":
+                case VoidPaymentNotification:
                     return new PaymentNotification(document, PaymentNotificationType.Void);
 
-                case "new_account_notification":
+                case NewAccountNotification:
                     return new AccountNotification(document, AccountNotificationType.New);
-                case "canceled_account_notification":
+                case CanceledAccountNotification:
                     return new AccountNotification(document, AccountNotificationType.Canceled);
-                case "billing_info_updated_notification":
+                case BillingInfoUpdatedNotification:
                     return new AccountNotification(document, AccountNotificationType.BillingInfoUpdated);
 
-                case "new_subscription_notification":
+                case NewSubscriptionNotification:
                     return new SubscriptionNotification(document, SubscriptionNotificationType.New);
-                case "updated_subscription_notification":
+                case UpdatedSubscriptionNotification:
                     return new SubscriptionNotification(document, SubscriptionNotificationType.Updated);
-                case "expired_subscription_notification":
+                case ExpiredSubscriptionNotification:
                     return new SubscriptionNotification(document, SubscriptionNotificationType.Expired);
-                case "canceled_subscription_notification":
+                case CanceledSubscriptionNotification:
                     return new SubscriptionNotification(document, SubscriptionNotificationType.Canceled);
-                case "renewed_subscription_notification":
+                case RenewedSubscriptionNotification:
                     return new SubscriptionNotification(document, SubscriptionNotificationType.Renewed);
-                case "reactivated_subscription_notification":
+                case ReactivatedSubscriptionNotification:
                     return new SubscriptionNotification(document, SubscriptionNotificationType.Reactivated);
             }
 

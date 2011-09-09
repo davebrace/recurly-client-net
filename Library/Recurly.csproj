@@ -48,7 +48,12 @@
   <ItemGroup>
     <Compile Include="InvalidCredentialsException.cs" />
     <Compile Include="NotFoundException.cs" />
+    <Compile Include="Notifications\NotificationBase.cs" />
+    <Compile Include="Notifications\Plan.cs" />
+    <Compile Include="Notifications\Subscription.cs" />
+    <Compile Include="Notifications\SubscriptionNotification.cs" />
     <Compile Include="Notifications\Transaction.cs" />
+    <Compile Include="Notifications\PaymentNotification.cs" />
     <Compile Include="RecurlyAccount.cs" />
     <Compile Include="RecurlyAccountCoupon.cs" />
     <Compile Include="RecurlyBillingInfo.cs" />
@@ -64,8 +69,8 @@
     <Compile Include="RecurlyInvoice.cs" />
     <Compile Include="RecurlyLineItem.cs" />
     <Compile Include="Notifications\Account.cs" />
-    <Compile Include="Notifications\Notification.cs" />
-    <Compile Include="Notifications\NotificationService.cs" />
+    <Compile Include="Notifications\AccountNotification.cs" />
+    <Compile Include="Notifications\NotificationFactory.cs" />
     <Compile Include="Notifications\NotificationType.cs" />
     <Compile Include="RecurlyPlan.cs" />
     <Compile Include="Configuration\RecurlySection.cs" />

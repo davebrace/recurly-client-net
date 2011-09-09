@@ -35,11 +35,11 @@ namespace Recurly.Test
 
             account.BillingInfo.Update();
 
-            RecurlyTransaction transaction = RecurlyTransaction.CreateAccountTransaction(account.AccountCode, 100,
-                                                                                         "Test one dollar transaction.");
+            //RecurlyTransaction transaction = RecurlyTransaction.CreateAccountTransaction(account.AccountCode, 100,
+            //                                                                             "Test one dollar transaction.");
 
-            Assert.AreEqual(100, transaction.AmountInCents);
-            Assert.IsFalse(string.IsNullOrEmpty(transaction.Id));
+            //Assert.AreEqual(100, transaction.AmountInCents);
+            //Assert.IsFalse(string.IsNullOrEmpty(transaction.Id));
         }
     }
 }

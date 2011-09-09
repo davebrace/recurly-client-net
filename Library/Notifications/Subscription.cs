@@ -18,7 +18,7 @@ namespace Recurly.Notifications
             ActivatedAt = DateTime.Parse(subscription.Element("activated_at").Value);
             CanceledAt = DateTime.Parse(subscription.Element("canceled_at").Value);
             ExpiresAt = DateTime.Parse(subscription.Element("expires_at").Value);
-            CurrentPeriodStartsAt = DateTime.Parse(subscription.Element("current_period_starts_at").Value);
+            CurrentPeriodStartedAt = DateTime.Parse(subscription.Element("current_period_started_at").Value);
             CurrentPeriodEndsAt = DateTime.Parse(subscription.Element("current_period_ends_at").Value);
 
             DateTime trialStartedAt, trialEndsAt;
@@ -35,7 +35,7 @@ namespace Recurly.Notifications
         public DateTime ActivatedAt { get; private set; }
         public DateTime CanceledAt { get; private set; }
         public DateTime ExpiresAt { get; private set; }
-        public DateTime CurrentPeriodStartsAt { get; private set; }
+        public DateTime CurrentPeriodStartedAt { get; private set; }
         public DateTime CurrentPeriodEndsAt { get; private set; }
         public DateTime? TrialStartedAt { get; private set; }
         public DateTime? TrialEndsAt { get; private set; }

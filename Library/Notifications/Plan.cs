@@ -10,8 +10,8 @@ namespace Recurly.Notifications
             XElement plan = element.Descendants("plan").FirstOrDefault();
             if (plan == null) return;
 
-            Code = element.Element("plan_code").Value;
-            Name = element.Element("name").Value;
+            Code = plan.Element("plan_code").Value;
+            Name = plan.Element("name").Value;
         }
 
         public string Code { get; private set; }
