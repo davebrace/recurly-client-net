@@ -29,6 +29,27 @@ namespace Recurly.Notifications
             Refundable = bool.Parse(transaction.Element("refundable").Value);
         }
 
+        public Transaction(string id, string invoiceId, string action, DateTime date, string status, string message,
+                           string reference, string cvvResult, string avsResult, string avsResultStreet,
+                           string avsResultPostal, bool test,
+                           bool voidable, bool refundable)
+        {
+            Id = id;
+            InvoiceId = invoiceId;
+            Action = action;
+            Date = date;
+            Status = status;
+            Message = message;
+            Reference = reference;
+            CvvResult = cvvResult;
+            AvsResult = avsResult;
+            AvsResultStreet = avsResultStreet;
+            AvsResultPostal = avsResultPostal;
+            Test = test;
+            Voidable = voidable;
+            Refundable = refundable;
+        }
+
         public string Id { get; private set; }
         public string InvoiceId { get; private set; }
         public string Action { get; private set; }

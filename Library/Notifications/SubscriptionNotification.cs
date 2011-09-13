@@ -4,6 +4,14 @@ namespace Recurly.Notifications
 {
     public class SubscriptionNotification : NotificationBase
     {
+        public SubscriptionNotification(Account account, Subscription subscription,
+                                        SubscriptionNotificationType notificationType)
+            : base(account)
+        {
+            Subscription = subscription;
+            SubscriptionNotificationType = notificationType;
+        }
+
         public SubscriptionNotification(XDocument document, SubscriptionNotificationType notificationType)
             : base(document)
         {

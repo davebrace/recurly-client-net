@@ -6,6 +6,25 @@ namespace Recurly.Notifications
 {
     public class Subscription
     {
+        public Subscription(Plan plan, string state, int quantity, int amountInCents, DateTime activatedAt,
+                            DateTime canceledAt,
+                            DateTime expiresAt, DateTime currentPeriodStartsAt, DateTime currentPeriodEndsAt,
+                            DateTime? trialStartedAt,
+                            DateTime? trialEndsAt)
+        {
+            Plan = plan;
+            State = state;
+            Quantity = quantity;
+            AmountInCents = amountInCents;
+            ActivatedAt = activatedAt;
+            CanceledAt = canceledAt;
+            ExpiresAt = expiresAt;
+            CurrentPeriodStartedAt = currentPeriodStartsAt;
+            CurrentPeriodEndsAt = currentPeriodEndsAt;
+            TrialStartedAt = trialStartedAt;
+            TrialEndsAt = trialEndsAt;
+        }
+
         public Subscription(XDocument element)
         {
             XElement subscription = element.Descendants("subscription").FirstOrDefault();

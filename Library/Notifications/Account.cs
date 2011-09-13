@@ -5,16 +5,20 @@ namespace Recurly.Notifications
 {
     public class Account
     {
-        public string AccountCode { get; private set; }
-        public string Username { get; private set; }
-        public string Email { get; private set; }
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public string CompanyName { get; private set; }
+        public Account(string accountCode, string username, string email, string firstName, string lastName,
+                       string companyName)
+        {
+            AccountCode = accountCode;
+            Username = username;
+            Email = email;
+            FirstName = firstName;
+            LastName = lastName;
+            CompanyName = companyName;
+        }
 
         public Account(XDocument document)
         {
-            var account = document.Descendants("account").FirstOrDefault();
+            XElement account = document.Descendants("account").FirstOrDefault();
 
             if (account == null) return;
 
@@ -25,5 +29,12 @@ namespace Recurly.Notifications
             LastName = account.Element("last_name").Value;
             CompanyName = account.Element("company_name").Value;
         }
+
+        public string AccountCode { get; private set; }
+        public string Username { get; private set; }
+        public string Email { get; private set; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public string CompanyName { get; private set; }
     }
 }

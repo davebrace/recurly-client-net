@@ -5,6 +5,12 @@ namespace Recurly.Notifications
 {
     public class Plan
     {
+        public Plan(string code, string name)
+        {
+            Code = code;
+            Name = name;
+        }
+
         public Plan(XElement element)
         {
             XElement plan = element.Descendants("plan").FirstOrDefault();
