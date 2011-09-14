@@ -53,5 +53,14 @@ namespace Recurly.Test.Notifications
             Assert.AreEqual(null, sub.Subscription.TrialStartedAt);
             Assert.AreEqual(null, sub.Subscription.TrialEndsAt);
         }
+
+        [Test]
+        public void TestNewSubscriptionNotificationParse()
+        {
+            var sub = new SubscriptionNotification(_documents.GetNewSubscriptionNotificationDocument(),
+                                                   SubscriptionNotificationType.New);
+
+            Assert.IsNotNull(sub);
+        }
     }
 }

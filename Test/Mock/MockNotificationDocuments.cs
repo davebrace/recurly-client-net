@@ -26,6 +26,13 @@ namespace Recurly.Test.Mock
             return XDocument.Parse(xml);
         }
 
+        public XDocument GetNewSubscriptionNotificationDocument()
+        {
+            const string xml =
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <new_subscription_notification>   <account>     <account_code>1035</account_code>     <username nil=\"true\"></username>     <email>dbrace@buzzreferrals.com</email>     <first_name>Dave</first_name>     <last_name>Brace</last_name>     <company_name>Buzz Referrals</company_name>   </account>   <subscription>     <plan>       <plan_code>basic</plan_code>       <name>Basic</name>     </plan>     <state>active</state>     <quantity type=\"integer\">1</quantity>     <total_amount_in_cents type=\"integer\">9900</total_amount_in_cents>     <activated_at type=\"datetime\">2011-09-14T15:09:47Z</activated_at>     <canceled_at type=\"datetime\"></canceled_at>     <expires_at type=\"datetime\"></expires_at>     <current_period_started_at type=\"datetime\">2011-09-14T15:09:47Z</current_period_started_at>     <current_period_ends_at type=\"datetime\">2011-10-15T07:00:00Z</current_period_ends_at>     <trial_started_at type=\"datetime\">2011-09-14T15:09:47Z</trial_started_at>     <trial_ends_at type=\"datetime\">2011-10-15T07:00:00Z</trial_ends_at>   </subscription> </new_subscription_notification>";
+            return XDocument.Parse(xml);
+        }
+
         public XDocument GetEmptyDocument(string type)
         {
             var doc = new XDocument();

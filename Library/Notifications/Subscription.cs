@@ -35,16 +35,18 @@ namespace Recurly.Notifications
             Quantity = int.Parse(subscription.Element("quantity").Value);
             AmountInCents = int.Parse(subscription.Element("total_amount_in_cents").Value);
             ActivatedAt = DateTime.Parse(subscription.Element("activated_at").Value);
-            CanceledAt = DateTime.Parse(subscription.Element("canceled_at").Value);
-            ExpiresAt = DateTime.Parse(subscription.Element("expires_at").Value);
             CurrentPeriodStartedAt = DateTime.Parse(subscription.Element("current_period_started_at").Value);
             CurrentPeriodEndsAt = DateTime.Parse(subscription.Element("current_period_ends_at").Value);
 
-            DateTime trialStartedAt, trialEndsAt;
+            DateTime trialStartedAt, trialEndsAt, canceled, expired;
             if (DateTime.TryParse(subscription.Element("trial_started_at").Value, out trialStartedAt))
                 TrialStartedAt = trialStartedAt;
             if (DateTime.TryParse(subscription.Element("trial_ends_at").Value, out trialEndsAt))
                 TrialEndsAt = trialEndsAt;
+            if (DateTime.TryParse(subscription.Element("canceled_at").Value, out canceled))
+                CanceledAt = canceled;
+            if (DateTime.TryParse(subscription.Element("expires_at").Value, out expired))
+                ExpiresAt = expired;
         }
 
         public Plan Plan { get; private set; }
@@ -52,8 +54,8 @@ namespace Recurly.Notifications
         public int Quantity { get; private set; }
         public int AmountInCents { get; private set; }
         public DateTime ActivatedAt { get; private set; }
-        public DateTime CanceledAt { get; private set; }
-        public DateTime ExpiresAt { get; private set; }
+        public DateTime? CanceledAt { get; private set; }
+        public DateTime? ExpiresAt { get; private set; }
         public DateTime CurrentPeriodStartedAt { get; private set; }
         public DateTime CurrentPeriodEndsAt { get; private set; }
         public DateTime? TrialStartedAt { get; private set; }
